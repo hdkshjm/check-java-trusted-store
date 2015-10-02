@@ -1,10 +1,8 @@
 #!/bin/bash
 SCRIPT_DIR=`echo $(cd $(dirname $0);pwd)`
 
-if [ "$JAVA_HOME" = ""  ]
+if [ "$JAVA_HOME" != ""  ]
 then
-	certs="/usr/j2se/jre/lib/security/cacerts"
-else
 	certs="${JAVA_HOME}/jre/lib/security/cacerts"
 fi
 
@@ -28,11 +26,12 @@ if [ $opt_h ]
 then
 	echo "-h : help"
 	echo "-u : must specify url"
-	echo "-c : certs file(default=\${JAVA_HOME}/jre/lib/security/cacerts or /usr/j2se/jre/lib/security/cacerts)"
+	echo "-c : certs file(default=\${JAVA_HOME}/jre/lib/security/cacerts)"
 	exit;
 fi
 
 cd $SCRIPT_DIR
+cd ../src
 javac SSLClientSample.java
 echo "JAVA_HOME=${JAVA_HOME}"
 echo "certs file=${certs}"
